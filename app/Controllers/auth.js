@@ -2,7 +2,7 @@ const User = require("../Models/User");
 const ErrorResponse = require("../Utils/errorsResponse");
 const { asyncHandler } = require("../Utils/middlewares");
 const { sendEmail } = require("../Config/emailConfig");
-const { tokenGenerator } = require("../Utils/helperFn");
+const { tokenGenerator, jwtGenerator } = require("../Utils/helperFn");
 
 /*
 	Desc: New customer registration
@@ -30,7 +30,7 @@ exports.register = asyncHandler(async (req, res, next) =>{
     emailType: "account_activation",
     subject: "House of Anasa: Account Activation"
   };
-  await sendEmail(mailOptions);
+  await sendEmail(mailOptions, req, next);
 
   return res.status(200).json({ success: true });
 });
@@ -56,10 +56,9 @@ exports.activateAccount = asyncHandler( async (req, res, next) =>{
   user.isActive = true;
   user.activationToken = "";
   user.activationTokenExpires = "";
-
   await user.save();
-  //login user feature needs to be added
-  return res.status(200).json({ success: true });
+  
+  return res.status(200).json({ success: true, token: jwtGenerator(user) });
 });
 
 /*

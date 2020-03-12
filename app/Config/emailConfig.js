@@ -1,19 +1,36 @@
 const nodemailer = require("nodemailer");
+const ErrorResponse = require("../Utils/errorsResponse");
 
 function transporterSetup() {
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    auth: {
-      user: process.env.SMTP_USERNAME,
-      pass: process.env.SMTP_PASSWORD
-    }
-  });
+  let transporter;
+
+  if(process.env.NODE_ENV === 'production'){
+    transporter = nodemailer.createTransport({
+      service: process.env.SMTP_SERVICE,
+      auth: {
+        user: process.env.SMTP_USERNAME,
+        pass: process.env.SMTP_PASSWORD
+      }
+    });
+  } else {
+    transporter = nodemailer.createTransport({
+      host: process.env.SMTP_DEV_HOST,
+      port: process.env.SMTP_PORT,
+      auth: {
+        user: process.env.SMTP_DEV_USERNAME,
+        pass: process.env.SMTP_DEV_PASSWORD
+      }
+    });
+  }; 
 
   return transporter;
 };
 
 function mailOptions(opts, req) {
+  if(!req || !opts){
+    throw new Error("Please provide proper argumants");
+  };
+
   const activationURL = `${req.protocol}://${req.get('host')}/api/v1/auth/account_activation/${opts.token}`;
   const pwdResetURL = `${process.env.FRONTEND_URL}/reset_password/${opts.token}`;
 
@@ -38,17 +55,20 @@ function mailOptions(opts, req) {
   return messageInfo;
 };
 
-exports.sendEmail = async (options, req) => {
+exports.sendEmail = async (options, req, next) => {
   const transporter = transporterSetup();
   const messageInfo = mailOptions(options, req);
+
+  console.log(messageInfo);
 
   // sendmail
   if (process.env.NODE_ENV !== 'production') {
     try {
       const info = await transporter.sendMail(messageInfo);
       return console.log("Message sent: %s", info.messageId);
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log("MAIL ERROR: ", err);
+      return next(new ErrorResponse(err.message, 400));
     };
   };
 };
