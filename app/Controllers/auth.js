@@ -1,6 +1,8 @@
 const User = require("../Models/User");
 const ErrorResponse = require("../Utils/errorsResponse");
 const { asyncHandler } = require("../Utils/middlewares");
+const { sendEmail } = require("../Config/emailConfig");
+const { tokenGenerator } = require("../Utils/helperFn");
 
 /*
 	Desc: New customer registration
@@ -16,7 +18,20 @@ exports.register = asyncHandler(async (req, res, next) =>{
     return next(new ErrorResponse(errMsg, 404));
   };
 
-  const user = await User.create({ firstName, lastName, email, password });
+  const user = new User({ firstName, lastName, email, password });
+  user.activationToken = tokenGenerator();
+  user.activationTokenExpires = (Date.now() + (3600000 * 2)); //expires in 2hrs
+  await user.save();
+
+  // send registration Email
+  const mailOptions = {
+    email: user.email,
+    token: user.activationToken,
+    emailType: "account_activation",
+    subject: "House of Anasa: Account Activation"
+  };
+  await sendEmail(mailOptions);
+
   return res.status(200).json({ success: true });
 });
 
