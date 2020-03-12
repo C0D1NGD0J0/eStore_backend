@@ -8,7 +8,7 @@ const connectDB = async () => {
         useNewUrlParser: true,
         useCreateIndex: true, 
         useFindAndModify: false,
-        useUnifiedTopology: false
+        useUnifiedTopology: true
       });
 
       return console.log("Connected to remote database".black.bgYellow);
