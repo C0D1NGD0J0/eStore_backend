@@ -55,6 +55,10 @@ UserSchema.pre('save', async function(next){
   this.password = await bcrypt.hash(this.password, salt);
 });
 
+UserSchema.methods.validatePassword = async function(pwd){
+  return await bcrypt.compare(pwd, this.password);
+};
+
 UserSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model("User", UserSchema);

@@ -67,7 +67,28 @@ exports.activateAccount = asyncHandler( async (req, res, next) =>{
 	access: Public
 */
 exports.login = asyncHandler(async (req, res, next) => {
-  return res.status(200).json({ success: true });
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email }).select('+password');
+  
+  if(!user){
+    const err = "Invalid email/password credentials.";
+    return next(new ErrorResponse(err, 401));
+  };
+
+  if(!user.isActive){
+    const err = "Please activate your account! to proceed.";
+    return next(new ErrorResponse(err, 401));
+  };
+
+  const isMatch = await user.validatePassword(password);
+
+  if(!isMatch){
+    const err = "Invalid email/password credentials.";
+    return next(new ErrorResponse(err, 401));
+  };
+
+  return res.status(200).json({ success: true, token: jwtGenerator(user)});
 });
 
 /*
