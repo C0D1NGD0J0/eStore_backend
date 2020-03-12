@@ -19,7 +19,7 @@ exports.register = asyncHandler(async (req, res, next) =>{
   };
 
   const user = new User({ firstName, lastName, email, password });
-  user.activationToken = tokenGenerator();
+  user.activationToken = await tokenGenerator();
   user.activationTokenExpires = (Date.now() + (3600000 * 2)); //expires in 2hrs
   await user.save();
 
@@ -32,6 +32,33 @@ exports.register = asyncHandler(async (req, res, next) =>{
   };
   await sendEmail(mailOptions);
 
+  return res.status(200).json({ success: true });
+});
+
+/*
+	Desc: Account activation
+	route: GET /api/v1/auth/account_activation/:token
+	access: Private
+*/
+exports.activateAccount = asyncHandler( async (req, res, next) =>{
+  const { token } = req.params;
+
+  const user = await User.findOne({
+    activationToken: token,
+    activationTokenExpires: { $gt: Date.now() }
+  });
+
+  if (!user) {
+    const msg = "Activation link has expired.";
+    return next(new ErrorResponse(msg, 404));
+  };
+  
+  user.isActive = true;
+  user.activationToken = "";
+  user.activationTokenExpires = "";
+
+  await user.save();
+  //login user feature needs to be added
   return res.status(200).json({ success: true });
 });
 

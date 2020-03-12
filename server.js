@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const PORT = (process.env.PORT || 5000);
 const authRoute = require("./app/Routes/auth");
 const userRoute = require("./app/Routes/users");
-const { errorHandler } = require("./app/Utils/errorsHandler");
+const errorHandler = require("./app/Utils/errorsHandler");
 const app = express();  
 
 if (process.env.NODE_ENV !== 'production') {
