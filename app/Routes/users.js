@@ -3,8 +3,8 @@ const { getCurrentUser, updateAccount, deleteAccount } = require("../Controllers
 
 router.get("/currentuser", getCurrentUser);
 
-router.put("/:id", updateAccount);
+router.put("/currentuser/updateAccount", updateAccount);
 
-router.delete("/:id/delete_account", deleteAccount);
+router.delete("/currentuser/delete_account", deleteAccount);
 
 module.exports = router;

@@ -106,6 +106,29 @@ exports.logout = asyncHandler(async (req, res, next) => {
 	access: Public
 */
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
+  const { email } = req.body;
+  const token = tokenGenerator();
+
+  const user = await User.findOne({ email });
+
+  if(!user){
+    const err = "No user found with the email provided.";
+    return next(new ErrorResponse(err, 401));
+  };
+
+  user.passwordResetToken = token;
+  user.passwordResetExpires = Date.now() + 7200000;
+  await user.save();
+
+  // send password reset email
+  const mailOptions = {
+    email: user.email,
+    token: user.passwordResetToken,
+    emailType: "password_reset",
+    subject: "House of Anasa: Password Reset"
+  };
+  await sendEmail(mailOptions, req, next);
+
   return res.status(200).json({ success: true });
 });
 
@@ -115,5 +138,20 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 	access: Private
 */
 exports.resetPassword = asyncHandler(async (req, res, next) => {
-  return res.status(200).json({ success: true });
+  const { token } = req.params;
+  const { password } = req.body;
+
+  const user = await User.findOne({ passwordResetToken: token, passwordResetExpires: { $gt: Date.now()} });
+
+  if(!user){
+    const err = "Please generate a new token.";
+    return next(new ErrorResponse(err, 401));
+  };
+
+  user.password = password;
+  user.passwordResetToken = "";
+  user.passwordResetExpires = "";
+  await user.save();
+
+  return res.status(200).json({ success: true, token: jwtGenerator(user) });
 });
