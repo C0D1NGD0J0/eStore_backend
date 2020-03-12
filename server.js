@@ -1,12 +1,14 @@
 const express = require("express");
 const logger = require("morgan");
 const colors = require("colors");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const PORT = (process.env.PORT || 5000);
 const authRoute = require("./app/Routes/auth");
 const userRoute = require("./app/Routes/users");
-const app = express();
+const { errorHandler } = require("./app/Utils/errorsHandler");
+const app = express();  
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -14,6 +16,9 @@ if (process.env.NODE_ENV !== 'production') {
 };
 
 // MIDDLEWARE
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // DATABASE CONNECTION
 require("./app/Database/")();
@@ -26,6 +31,7 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", userRoute);
 
 // ERROR HANDLING
+app.use(errorHandler);
 
 // SERVER INIT
 const server = app.listen(PORT, () =>{
