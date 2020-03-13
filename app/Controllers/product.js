@@ -8,7 +8,10 @@ const { asyncHandler } = require("../Utils/middlewares");
 	access: Private
 */
 exports.getAllProducts = asyncHandler(async (req, res, next) =>{
-  return res.status(200).json({ success: true });
+  const products = await Product.find({quantity: {$gt: 0}});
+  const count = await Product.countDocuments({});
+
+  return res.status(200).json({ success: true, products, count });
 });
 
 /*
