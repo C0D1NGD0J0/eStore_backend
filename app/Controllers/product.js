@@ -1,0 +1,8 @@
+getAllProducts
+createProduct
+getCategoryProducts
+featuredProducts
+addToWishlist
+getProduct
+updateProduct
+deleteProduct
