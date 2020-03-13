@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const { execValidations } = require("../Utils/validations");
-const { getAllProducts, createProduct, getCategoryProducts, featuredProducts, addToWishlist, getProduct, updateProduct, deleteProduct } = "../Controllers/product";
+const { validateProduct, execValidations } = require("../Utils/validations");
+const { getAllProducts, createProduct, getCategoryProducts, featuredProducts, addToWishlist, getProduct, updateProduct, deleteProduct } = require("../Controllers/product.js");
 
 router.route("/")
   .get(getAllProducts)
-  .post(createProduct);
+  .post(validateProduct(), execValidations, createProduct);
 
-router.get("/categories", getCategoryProducts);
+router.get("/categories/:id", getCategoryProducts);
 
 router.get("/featured", featuredProducts);
 
@@ -14,8 +14,7 @@ router.put("/:id/add_to_wishlist", addToWishlist);
 
 router.route("/:id")
   .get(getProduct)
-  .put(updateProduct)
+  .put(validateProduct(), execValidations, updateProduct)
   .delete(deleteProduct);
-
 
 module.exports = router;

@@ -17,6 +17,16 @@ exports.validateLogin = () => {
   ];
 };
 
+exports.validateProduct = () => {
+  return [
+    check('name', "Product name needs to be provided.").exists().isLength({min: 3, max: 40}),
+    check('description', "Description must be between 15 and 2000 characters.").isLength({ max: 2000, min: 15 }),
+    check('price', "Price must be provided.").not().isEmpty(),
+    check('brandName', 'Brand field must be filled').not().isEmpty(),
+    check('quantity', "Quantity field must be filled.").isInt({ min: 1, max: 5000 })
+  ];
+};
+
 exports.execValidations = (req, res, next) => {
   let errorsList = [];
   let errors = validationResult(req);

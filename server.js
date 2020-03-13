@@ -7,7 +7,7 @@ const PORT = (process.env.PORT || 5000);
 const authRoute = require("./app/Routes/auth");
 const userRoute = require("./app/Routes/users");
 const productRoute = require("./app/Routes/products");
-const categoryRoute = require("./app/Routes/categories");
+//const categoryRoute = require("./app/Routes/categories");
 const errorHandler = require("./app/Utils/errorsHandler");
 const app = express();  
 
@@ -45,7 +45,7 @@ const server = app.listen(PORT, () =>{
 });
 
 // unhandled promise rejection
-process.on("unhandledRejection", (err, promise) =>{
+process.once("unhandledRejection", (err, promise) =>{
   console.log(`Error: ${err.message}`.red.bold);
   server.close(() => process.exit(1));
 });
