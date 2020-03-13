@@ -10,8 +10,10 @@ const SubCategorySchema = new Schema({
     minlength: 3,
     maxlength: 50,
     unique: true,
+    lowercase: true,
     required: [true, "Topic name is required"]
   },
+  imgUrl: String,
   slug: String
 });
 
@@ -21,9 +23,11 @@ const CategorySchema = new Schema({
     trim: true,
     unique: true,
     minlength: 3,
+    lowercase: true,
     maxlength: 50,
     required: [true, "Category Name is required"]
   },
+  imgUrl: String,
   slug: String,
   subcategories: [SubCategorySchema]
 }, { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } });

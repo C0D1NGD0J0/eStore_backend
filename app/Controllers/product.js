@@ -20,11 +20,12 @@ exports.getAllProducts = asyncHandler(async (req, res, next) =>{
 	access: Private
 */
 exports.createProduct = asyncHandler(async (req, res, next) => {
-  const { name, photo, price, description, brandName, quantity, featured } = req.body;
+  const { name, photo, price, description, brandName, quantity, featured, categoryId } = req.body;
 
   let product = new Product({
-    name, price: parseFloat(price), description, brandName, quantity: parseInt(quantity), featured
+    name, price: parseFloat(price), description, brandName, quantity: parseInt(quantity), featured, category: categoryId
   });
+  
   product.photos.push(photo);
   await product.save();
 
