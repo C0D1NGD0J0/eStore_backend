@@ -27,7 +27,10 @@ const ProductSchema = new Schema({
   featured: { type: Boolean, default: false },
   photos: [{ filename: String, url: String }],
   author: { type: Schema.Types.ObjectId, ref: 'User' },
-  category: { type: Schema.Types.ObjectId, ref: 'Category' },
+  category: { 
+    parentCategory: {type: Schema.Types.ObjectId, ref: 'Category'},
+    subCategory: { type: Schema.Types.ObjectId, ref: 'Category' },
+  },
   brandName: { type: String, trim: true, minlength: 3, maxlength: 25, lowercase: true, required: true },
   avgRatings: { type: Number, min: [1, 'Product rating must be at least 1'], max: [5, "Rating cann't be greater than 5"]}
 }, { timestamps: true });

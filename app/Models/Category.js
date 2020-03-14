@@ -44,6 +44,11 @@ CategorySchema.statics.getSubCategorysList = function () {
   ]);
 };
 
+CategorySchema.methods.getSubCategories = async function(subCatId){
+  const result = await this.model('Category').findById(subCatId).subcategories;
+  return result;
+};
+
 CategorySchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model("Category", CategorySchema);
