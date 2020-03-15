@@ -44,10 +44,10 @@ CategorySchema.statics.getSubCategorysList = function () {
   ]);
 };
 
-CategorySchema.methods.getSubCategories = async function(subCatId){
-  const result = await this.model('Category').findById(subCatId).subcategories;
-  return result;
-};
+//CategorySchema.methods.getSubCategories = async function(subCatId){
+//  const result = await this.model('Category').findById(this._id).subcategories;
+//  return result;
+//};
 
 CategorySchema.plugin(uniqueValidator);
 

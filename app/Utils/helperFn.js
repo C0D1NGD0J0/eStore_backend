@@ -11,3 +11,13 @@ exports.tokenGenerator = async function () {
 exports.jwtGenerator = (user) =>{
   return jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIREIN });
 };
+
+exports.paginateResult = (count, skip, limit) => {
+  return {
+    "total": count,
+    "per_page": parseInt(limit),
+    "current_page": (Math.floor(skip / limit) + 1),
+    "total_pages": Math.ceil(count / limit),
+    "hasMoreResource": (count - (page * limit) > 0)
+  };
+};

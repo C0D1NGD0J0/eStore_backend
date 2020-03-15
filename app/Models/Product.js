@@ -27,6 +27,7 @@ const ProductSchema = new Schema({
   featured: { type: Boolean, default: false },
   photos: [{ filename: String, url: String }],
   author: { type: Schema.Types.ObjectId, ref: 'User' },
+  isActive: {type: Boolean, default: false},
   category: { 
     parentCategory: {type: Schema.Types.ObjectId, ref: 'Category'},
     subCategory: { type: Schema.Types.ObjectId, ref: 'Category' },
