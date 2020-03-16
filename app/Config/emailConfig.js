@@ -31,7 +31,7 @@ function mailOptions(opts, req) {
     throw new Error("Please provide proper argumants");
   };
 
-  const activationURL = `${req.protocol}://${req.get('host')}/api/v1/auth/account_activation/${opts.token}`;
+  const activationURL = `${process.env.FRONTEND_URL}/account_activation/${opts.token}`;
   const pwdResetURL = `${process.env.FRONTEND_URL}/reset_password/${opts.token}`;
 
   const emailTemplate = {

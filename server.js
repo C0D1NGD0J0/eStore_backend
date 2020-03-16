@@ -17,7 +17,10 @@ if (process.env.NODE_ENV !== 'production') {
 };
 
 // MIDDLEWARE
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  optionsSuccessStatus: 200
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

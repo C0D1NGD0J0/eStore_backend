@@ -13,11 +13,13 @@ exports.jwtGenerator = (user) =>{
 };
 
 exports.paginateResult = (count, skip, limit) => {
-  return {
+  const result = {
     "total": count,
     "per_page": parseInt(limit),
     "current_page": (Math.floor(skip / limit) + 1),
-    "total_pages": Math.ceil(count / limit),
-    "hasMoreResource": (count - (page * limit) > 0)
+    "total_pages": Math.ceil(count / limit)
   };
+
+  result.hasMoreResource = (count - (result.current_page * limit) > 0);
+  return result;
 };

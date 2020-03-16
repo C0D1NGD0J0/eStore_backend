@@ -13,7 +13,7 @@ const { paginateResult } = require("../Utils/helperFn");
 exports.getAllProducts = asyncHandler(async (req, res, next) =>{
   let query, skip;
   let { page, limit, sortBy } = req.query;
-
+  
   // pagination
   page = parseInt(page, 10) || 1;
   limit = parseInt(limit, 10) || 1;

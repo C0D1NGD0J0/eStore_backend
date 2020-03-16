@@ -14,7 +14,7 @@ exports.register = asyncHandler(async (req, res, next) =>{
   
   const founduser = await User.findOne({ email });
   if(founduser){
-    let errMsg = `This email(${email}) is already associated with an account.`;
+    let errMsg = `The email(${email}) is already associated with an account.`;
     return next(new ErrorResponse(errMsg, 404));
   };
 
@@ -32,7 +32,7 @@ exports.register = asyncHandler(async (req, res, next) =>{
   };
   await sendEmail(mailOptions, req, next);
 
-  return res.status(200).json({ success: true });
+  return res.status(200).json({ success: true, msg: "Confirmation email has been sent to your registered email." });
 });
 
 /*
