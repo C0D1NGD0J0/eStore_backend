@@ -1,10 +1,11 @@
 const router = require("express").Router();
+const { isAuthorized } = require("../Utils/middlewares");
 const { getCurrentUser, updateAccount, deleteAccount } = require("../Controllers/users");
 
-router.get("/currentuser", getCurrentUser);
+router.get("/currentuser", isAuthorized, getCurrentUser);
 
-router.put("/currentuser/updateAccount", updateAccount);
+router.put("/currentuser/updateAccount", isAuthorized, updateAccount);
 
-router.delete("/currentuser/delete_account", deleteAccount);
+router.delete("/currentuser/delete_account", isAuthorized, deleteAccount);
 
 module.exports = router;

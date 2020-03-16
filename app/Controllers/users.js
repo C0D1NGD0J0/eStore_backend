@@ -7,9 +7,12 @@ const { asyncHandler } = require("../Utils/middlewares");
 	route: GET /api/v1/users/currentuser
 	access: Public
 */
-exports.getCurrentUser = (req, res, next) =>{
-  return res.status(200).json({ currentuser: req.currentuser });
-};
+exports.getCurrentUser = asyncHandler(async(req, res, next) =>{
+  const user = await User.findById(req.currentuser.id);
+  const currentuser = await user.profile();
+
+  return res.status(200).json({ success: true, currentuser });
+});
 
 /*
 	Desc: Update logged-in user account

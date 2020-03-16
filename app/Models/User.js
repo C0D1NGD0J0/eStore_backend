@@ -44,7 +44,7 @@ const UserSchema = new Schema({
   passwordResetExpires: { type: Date, default: "" },
   activationTokenExpires: { type: Date, default: "" },
   wishlist: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
-}, { timestamps: true });
+}, { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } });
 
 UserSchema.pre('save', async function(next){
   if (!this.isModified('password')) {
@@ -57,6 +57,20 @@ UserSchema.pre('save', async function(next){
 
 UserSchema.methods.validatePassword = async function(pwd){
   return await bcrypt.compare(pwd, this.password);
+};
+
+UserSchema.virtual("fullname").get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
+
+UserSchema.methods.profile = async function(){
+  return {
+    role: this.role,
+    email: this.email,
+    wishlist: this.wishlist,
+    fullname: this.fullname,
+    purchaseHistory: this.purchaseHistory
+  };
 };
 
 UserSchema.plugin(uniqueValidator);
