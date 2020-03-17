@@ -10,7 +10,7 @@ router.post("/register", validateRegister(), execValidations, register);
 
 router.get("/account_activation/:token", activateAccount);
 
-router.put("/reset_password", resetPassword);
+router.put("/reset_password/:token", resetPassword);
 
 router.post("/forgot_password", forgotPassword);
 

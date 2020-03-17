@@ -107,8 +107,7 @@ exports.logout = asyncHandler(async (req, res, next) => {
 */
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const { email } = req.body;
-  const token = tokenGenerator();
-
+  const token = await tokenGenerator();
   const user = await User.findOne({ email });
 
   if(!user){
@@ -128,8 +127,9 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     subject: "House of Anasa: Password Reset"
   };
   await sendEmail(mailOptions, req, next);
-
-  return res.status(200).json({ success: true });
+  const msg = "An email has been sent to the supplied email address with instructions to reset your password.";
+  
+  return res.status(200).json({ success: true, msg });
 });
 
 /*

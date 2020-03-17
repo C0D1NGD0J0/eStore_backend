@@ -31,8 +31,8 @@ function mailOptions(opts, req) {
     throw new Error("Please provide proper argumants");
   };
 
-  const activationURL = `${process.env.FRONTEND_URL}/account_activation/${opts.token}`;
-  const pwdResetURL = `${process.env.FRONTEND_URL}/reset_password/${opts.token}`;
+  const activationURL = `${process.env.FRONTEND_URL}/auth/account_activation/${opts.token}`;
+  const pwdResetURL = `${process.env.FRONTEND_URL}/auth/reset_password/${opts.token}`;
 
   const emailTemplate = {
     account_activation: `<h1>Activate your House of Anasa Account</h1><hr>
