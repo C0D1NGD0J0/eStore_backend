@@ -9,7 +9,8 @@ const { asyncHandler } = require("../Utils/middlewares");
 	access: Public
 */
 exports.getCategories = asyncHandler(async (req, res, next) => {
-  const categories = await Category.find({}).select("-subcategories");
+  const excludedFields = ["-subcategories", "-imgUrl", "-createdAt", "-updatedAt"];
+  const categories = await Category.find({}).select(excludedFields);
   const count = await Category.countDocuments({});
 
   return res.status(200).json({ success: true, categories, count });
@@ -32,7 +33,7 @@ exports.getSubCategories = asyncHandler(async (req, res, next) => {
   const count = parentCategory.subcategories.length;
   const subCategories = parentCategory.subcategories;
 
-  return res.status(200).json({ success: true, subCategories, count });
+  return res.status(200).json({ success: true, count, subCategories });
 });
 
 /*

@@ -1,19 +1,40 @@
 [
   {
     "name": "Televisions",
-    "imgUrl": "https://images.ctfassets.net/8cd2csgvqd3m/5GbnuCJjPm52L58QSCBupe/a274c650c173faddc4da9bda1d269a6e/eclipse-bronze.png?q=90&fm=webp&w=720&h=720&fit=fill"
+    "imgUrl": "https://images.ctfassets.net/8cd2csgvqd3m/5GbnuCJjPm52L58QSCBupe/a274c650c173faddc4da9bda1d269a6e/eclipse-bronze.png?q=90&fm=webp&w=720&h=720&fit=fill",
+    "subcategories": [
+      {"name": "OLED", "imgUrl": ""},
+      {"name": "4K Ultra HD", "imgUrl": ""},
+      {"name": "Smart TVs", "imgUrl": ""}
+    ]
   },
   {
     "name": "Speakers",
-    "imgUrl": "https://images.ctfassets.net/8cd2csgvqd3m/RZCYJgQK4z8lOwjQFx11v/c3a0f6317b766ea9d909e28c05f9d602/beolab-20-overview5.png?q=90&fm=webp&w=480&h=480&fit=fill"
+    "imgUrl": "https://images.ctfassets.net/8cd2csgvqd3m/RZCYJgQK4z8lOwjQFx11v/c3a0f6317b766ea9d909e28c05f9d602/beolab-20-overview5.png?q=90&fm=webp&w=480&h=480&fit=fill",
+    "subcategories":[
+      {"name": "Multi-room Speakers", "imgUrl": ""},
+      {"name": "Home Theatre Speakers", "imgUrl": ""},
+      {"name": "Portable Speakers", "imgUrl": ""}
+    ]
   },
   {
     "name": "Headphones",
-    "imgUrl": "https://assets.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/global/products/headphones/soundlink_around-ear_wireless_headphones_II/product_silo_images/sl_ae_II_black_EC_hero.psd/jcr:content/renditions/cq5dam.web.1000.1000.png"
+    "imgUrl": "https://assets.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/global/products/headphones/soundlink_around-ear_wireless_headphones_II/product_silo_images/sl_ae_II_black_EC_hero.psd/jcr:content/renditions/cq5dam.web.1000.1000.png",
+    "subcategories":[
+      {"name": "Over-Ear", "imgUrl": ""},
+      {"name": "On-Ear", "imgUrl": ""},
+      {"name": "Wireless", "imgUrl": ""},
+      {"name": "Earbuds_&_In-ear", "imgUrl": ""}
+    ]
   },
   {
     "name": "Watches",
-    "imgUrl": "https://images.selfridges.com/is/image/selfridges/759-10001-ART5006_ALT01?$PLP_ALL$"
+    "imgUrl": "https://images.selfridges.com/is/image/selfridges/759-10001-ART5006_ALT01?$PLP_ALL$",
+    "subcategories":[
+      {"name": "Fashion Watches", "imgUrl": ""},
+      {"name": "Smartwatches", "imgUrl": ""},
+      {"name": "Fitness Tracking", "imgUrl": ""}      
+    ]
   },
   {
     "name": "Gifts",

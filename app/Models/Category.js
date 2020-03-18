@@ -10,7 +10,6 @@ const SubCategorySchema = new Schema({
     minlength: 3,
     maxlength: 50,
     unique: true,
-    lowercase: true,
     required: [true, "Topic name is required"]
   },
   imgUrl: String,
@@ -23,7 +22,6 @@ const CategorySchema = new Schema({
     trim: true,
     unique: true,
     minlength: 3,
-    lowercase: true,
     maxlength: 50,
     required: [true, "Category Name is required"]
   },
@@ -34,6 +32,13 @@ const CategorySchema = new Schema({
 
 CategorySchema.pre("save", function (next) {
   this.slug = slugify(this.name, { lower: true, replacement: '_' });
+
+  if(this.subcategories){
+    this.subcategories.map((cat) =>{
+      cat.slug = slugify(cat.name, { lower: true, replacement: '_' });
+    });
+  };
+  
   next();
 });
 
