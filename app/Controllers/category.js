@@ -9,7 +9,7 @@ const { asyncHandler } = require("../Utils/middlewares");
 	access: Public
 */
 exports.getCategories = asyncHandler(async (req, res, next) => {
-  const categories = await Category.find({}).select("name imgUrl");
+  const categories = await Category.find({}).select("-subcategories");
   const count = await Category.countDocuments({});
 
   return res.status(200).json({ success: true, categories, count });
