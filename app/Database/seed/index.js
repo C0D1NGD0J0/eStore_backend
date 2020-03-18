@@ -5,14 +5,14 @@ const colors = require("colors");
 
 const Category = require("../../Models/Category");
 
-await mongoose.connect(process.env.LOCALDB_URI, {
+mongoose.connect(process.env.LOCALDB_URI, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
   useFindAndModify: false
 });
 
-const categories = JSON.parse(fs.readFileSync(`${__dirname}/app/Database/seed/categories.json`, 'utf-8'));
+const categories = JSON.parse(fs.readFileSync(`${__dirname}/categories.json`, 'utf-8'));
 
 const importData = async () => {
   try {
@@ -41,3 +41,5 @@ if (process.argv[2] === "import_seed") {
   console.log("Deleting...");
   deleteData();
 };
+
+//node app / database / seed.js delete_seed

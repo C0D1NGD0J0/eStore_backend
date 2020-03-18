@@ -54,8 +54,8 @@ exports.createCategory = asyncHandler(async (req, res, next) => {
 	access: Private
 */
 exports.createSubCategory = asyncHandler(async (req, res, next) => {
-  const { name, imgUrl } = req.body;
   const { id } = req.params;
+  const { name, imgUrl } = req.body;
 
   let parentCategory = await Category.findById(id);
 
