@@ -20,7 +20,7 @@ const isAuthorized = asyncHandler(async (req, res, next) =>{
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.currentuser = await User.findById(decoded.id);
+    req.currentuser = await User.findById(decoded.id).select("+password");
     next();
   } catch (error) {
     console.log("Err: ", error.message.red.bold.underline);

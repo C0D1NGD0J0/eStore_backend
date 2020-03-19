@@ -20,16 +20,21 @@ exports.getCurrentUser = asyncHandler(async(req, res, next) =>{
 	access: Private
 */
 exports.updateAccount = asyncHandler(async (req, res, next) =>{
-  const { firstName, lastName, email, password, currentPassword, phone } = req.body;
-
-  const isMatch = await req.currentuser.validatePassword(currentPassword);
+  const { firstName, lastName, email, password, currentPwd, phone } = req.body;
+  ;
+  const isMatch = await req.currentuser.validatePassword(currentPwd);
   if(!isMatch){
     const err = "Current password must be provided to update account.";
     return next(new ErrorResponse(err, 401));
   };
 
-  const updateData = { firstName, lastName, email, password, phone };
-  const currentuser = await User.findByIdAndUpdate(req.currentuser.id, updateData, {new: true});
+  const updateData = { firstName, lastName, email, phone };
+  if(password){
+    updateData.password = password;
+  };
+
+  let currentuser = await User.findByIdAndUpdate(req.currentuser.id, updateData, {new: true});
+  currentuser = await currentuser.profile();
 
   return res.status(200).json({ success: true, currentuser });
 });

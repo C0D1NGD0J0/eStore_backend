@@ -31,6 +31,18 @@ const UserSchema = new Schema({
     enum: ['customer', 'admin'],
     default: 'customer'
   },
+  phone:{
+    type: String,
+    validate: {
+      validator: function (v) {
+        let result;
+        result = /\d{3}-\d{3}-\d{4}/.test(v);
+        return result;
+      },
+      message: '{VALUE} is not a valid phone number!'
+    },
+    minlength: [9, "Too few number characters provided."]
+  },
   password: {
     type: String,
     required: [true, 'Please provide a password'],
