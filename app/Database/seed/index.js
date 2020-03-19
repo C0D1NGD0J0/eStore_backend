@@ -42,4 +42,4 @@ if (process.argv[2] === "import_seed") {
   deleteData();
 };
 
-//node app / database / seed.js delete_seed
+//node app database seed.js delete_seed
