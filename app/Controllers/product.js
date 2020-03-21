@@ -84,8 +84,10 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
 	access: Public
 */
 exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
+  let skip;
+  let { page, limit} = req.query;
   const { categoryId } = req.params;
-  const category = await Category.findById(categoryId).select("slug");
+  const category = await Category.findById(categoryId).select("-subcategories");
   
   if (!category) {
     let errMsg = "Invalid resource ID provided";
@@ -94,11 +96,12 @@ exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
   
   // pagination
   page = parseInt(page, 10) || 1;
-  limit = parseInt(limit, 10) || 1;
+  limit = parseInt(limit, 10) || 2;
   skip = (page - 1) * limit;
 
   const products = await Product.find({ isActive: true, "category.parentCategory": category._id }).skip(skip).limit(limit);
-  const count = products.length;
+
+  const count = await Product.countDocuments({"category.parentCategory": category._id});
   const pagination = paginateResult(count, skip, limit);
   
   return res.status(200).json({ success: true, pagination, products });

@@ -5,6 +5,7 @@ const { getAllProducts, createProduct, getCategoryProducts, featuredProducts, ad
 router.route("/")
   .get(getAllProducts)
   .post(validateProduct(), execValidations, createProduct);
+  
 router.get("/categories/:categoryId", getCategoryProducts);
 router.get("/featured", featuredProducts);
 router.put("/:id/add_to_wishlist", addToWishlist);
