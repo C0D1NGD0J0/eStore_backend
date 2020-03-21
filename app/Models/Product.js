@@ -6,7 +6,7 @@ const ProductSchema = new Schema({
   name: {
     trim: true,
     type: String,
-    maxlength: 40,
+    maxlength: 70,
     unique: true,
     lowercase: true,
     required: [true, 'Product Name is required!']
@@ -22,6 +22,7 @@ const ProductSchema = new Schema({
     type: Number,
     required: true
   },
+  slug: String,
   soldCount: { default: 0, type: Number },
   quantity: { type: Number, default: 0, required: true },
   featured: { type: Boolean, default: false },
@@ -32,7 +33,7 @@ const ProductSchema = new Schema({
     parentCategory: {type: Schema.Types.ObjectId, ref: 'Category'},
     subCategory: { type: Schema.Types.ObjectId, ref: 'Category' },
   },
-  brandName: { type: String, trim: true, minlength: 3, maxlength: 25, lowercase: true, required: true },
+  brandName: { type: String, trim: true, minlength: 2, maxlength: 25, lowercase: true, required: true },
   avgRatings: { type: Number, min: [1, 'Product rating must be at least 1'], max: [5, "Rating cann't be greater than 5"]}
 }, { timestamps: true });
 

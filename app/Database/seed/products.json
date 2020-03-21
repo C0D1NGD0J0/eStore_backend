@@ -1,0 +1,464 @@
+[
+  {
+    "id": "",
+    "name": "Bose 400 Series",
+    "photo": {
+      "filename": "Bose-Quiet-Comfort",
+      "url": "https://s7d2.scene7.com/is/image/bose/black-4?wid=800&hei=800"
+    },
+    "price": "449.99",
+    "slug": "",
+    "description": "QuietComfort 35 wireless headphones II are engineered with renowned noise cancellation that makes quiet sound quieter and your music sound better. With the Google Assistant and Amazon Alexa built-in, you have instant access to millions of songs, playlists and more—hands free. Simply choose your voice assistant and ask away. And that’s just the beginning. QuietComfort 35 wireless headphones II are now enabled with Bose AR, a first-of-its-kind audio augmented reality platform.",
+    "brandName": "Bose",
+    "quantity": 20,
+    "featured": true,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Headphones",
+      "subCat": "Over-Ear",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Bose 700 Series",
+    "slug": "",
+    "photo": {
+      "filename": "bose_700_series",
+      "url": "https://houseofanasa.s3.amazonaws.com/bose_700S.png"
+    },
+    "price": "500",
+    "description": "Bose Noise Cancelling Headphones 700 deliver everything you’d expect—and things you’d never have imagined possible. Think of them as smart headphones that let you keep your head up to the world with easy access to voice assistants. Or confidently take a call with the most powerful microphone system for voice pickup. And then there’s Bose AR*, a first-of-its-kind audio augmented reality platform that makes astonishing new audio experiences possible.",
+    "brandName": "Bose",
+    "quantity": 10,
+    "featured": true,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Headphones",
+      "subCat": "Over-Ear",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "SoundLink Around-Ear Wireless Headphone",
+    "slug": "",
+    "photo": {
+      "filename": "soundlink_around-ear_wireless_headphones",
+      "url": "https://assets.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/global/products/headphones/soundlink_around-ear_wireless_headphones_II/product_silo_images/sl_ae_II_black_EC_hero.psd/jcr:content/renditions/cq5dam.web.1000.1000.png"
+    },
+    "price": "269.99",
+    "description": "Music makes you feel free. Wires shouldn’t get in the way of that. SoundLink® wireless headphones are engineered for exceptional sound, which stays consistent at any volume thanks to a combination of exclusive technologies. With clear calls in any environment, durable materials and a comfortable fit, you can experience wireless freedom. And uncompromised performance.",
+    "brandName": "Bose",
+    "quantity": 5,
+    "featured": true,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Headphones",
+      "subCat": "Around-Ear",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Beoplay H4 2nd-Gen",
+    "slug": "",
+    "photo": {
+      "filename": "beoplay_h4_2nd-gen",
+      "url": "https://images.ctfassets.net/8cd2csgvqd3m/25LWw4cyQZGJNeUaWGzGHm/442fbf0b26346054cec4bf3463d7528d/h4_black1000x1000l.png?q=90&fm=webp&w=720&h=720&fit=fill"
+    },
+    "price": "349.99",
+    "description": "Beoplay H4 deliver an authentic and a finely tuned acoustic performance based on our strong heritage of sound engineering dating back to 1925. No matter if you use Beoplay H4 wireless or corded, the music will immerse you – and let you stay in the moment.",
+    "brandName": "Bang&Olufsen",
+    "quantity": 15,
+    "featured": true,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Headphones",
+      "subCat": "Over-Ear",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Beoplay E8 3rd Gen",
+    "slug": "",
+    "photo": {
+      "filename": "beoplay_e8_3rd-gen",
+      "url": "https://images.ctfassets.net/8cd2csgvqd3m/I6h0sQ3ZAe8lJjhJ7q4WY/23a9d87ef501c3c719160029b6778748/CMS_1.png?q=90&fm=webp&w=720&h=720&fit=fill"
+    },
+    "price": "475.00",
+    "description": "The newest version of our truly wireless in-ear earphones with an improved battery life of up to 35 hours, a QI-certified wireless charging case and Bluetooth 5.1 connectivity ensure a seamless and powerful listening experience.",
+    "brandName": "Bang&Olufsen",
+    "quantity": 9,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Headphones",
+      "subCat": "In-Ear",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Beoplay H3",
+    "slug": "",
+    "photo": {
+      "filename": "beoplay_h3",
+      "url": "https://images.ctfassets.net/8cd2csgvqd3m/Eo4XiqVTUrbiBfUvBabgu/2f44f7fd83c456e11caf3087ef4340e7/h3_black_1000x1000.png?q=90&fm=webp&w=720&h=720&fit=fill"
+    },
+    "price": "200.00",
+    "description": "Premium in-ear headphones for authentic sound experiences. Robust yet ultra-light, designed to fit with precision and comfort.",
+    "brandName": "Bang&Olufsen",
+    "quantity": 30,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Headphones",
+      "subCat": "In-Ear",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Stockwell bluetooth Speakers",
+    "slug": "",
+    "photo": {
+      "filename": "stockwell_bluetooth_speakers",
+      "url": "https://images.selfridges.com/is/image/selfridges/761-10044-MARSHSTOCKWELLBLK_ALT10?$PDP_M_ZOOM$&defaultImage=761-10044-MARSHSTOCKWELLBLK_M"
+    },
+    "price": "170.00",
+    "description": "the Stockwell is the smallest travel speaker made by Marshall today. This portable active stereo speaker weighs just 1.20kg, which means it’ll go wherever you want it to. Rechargeable lithium-ion batteries are built into the Stockwell, which give it 25 hours of playing time. The handy USB port also allows you to charge your devices when you’re on the go.",
+    "brandName": "Marshall",
+    "quantity": 25,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Speakers",
+      "subCat": "portable_speakers",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Bose Portable Home Speakers",
+    "slug": "",
+    "photo": {
+      "filename": "bose_portable_home_speakers",
+      "url": "https://images.selfridges.com/is/image/selfridges/761-10044-BOSPORTHOMESPK_LUXESILVER_ALT10?$PDP_M_ZOOM$&defaultImage=761-10044-BOSPORTHOMESPK_LUXESILVER_M"
+    },
+    "price": "420.00",
+    "description": "Bose portable bluetooth speaker Spacious 360° sound, powerful bass Built-in voice control Durable, water - resistant design Control with voice, touch or app Up to 12 hours battery life per charge Wi - fi® and Bluetooth® connectivity Apple Airplay 2",
+    "brandName": "Bose",
+    "quantity": 25,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Speakers",
+      "subCat": "portable_speakers",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Home Speaker 300 Series",
+    "slug": "",
+    "photo": {
+      "filename": "bose_home_speaker_300_series",
+      "url": "https://images.selfridges.com/is/image/selfridges/761-10044-BOSHOMESPK300_TRIPLEBLACK_ALT10?$PDP_M_ZOOM$&defaultImage=761-10044-BOSHOMESPK300_TRIPLEBLACK_M"
+    },
+    "price": "310.00",
+    "description": "Built-in voice assistants Play.Pause.Shuffle.All with built -in voice assistants, like the Google Assistant and Alexa, you’ll have instant access to music with just your voice as well as access to things like weather reports and news headlines, too.So, if you want to hear something, just ask.",
+    "brandName": "Bose",
+    "quantity": 50,
+    "featured": true,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Speakers",
+      "subCat": "portable_speakers",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Beolab 18 Wireless Home Speakers",
+    "slug": "",
+    "photo": {
+      "filename": "beolab_18_wireless_speakers",
+      "url": "https://images.ctfassets.net/8cd2csgvqd3m/7Dqhqr8onqxPSejB4Ok97p/264d58cd4a5cb41c98abfcc7b128bea6/beolab-18-bronze.png?q=90&fm=webp&w=720&h=720&fit=fill"
+    },
+    "price": "6899.99",
+    "description": "The Beolab 18 loudspeakers from Bang & Olufsen are something of a sonic masterpiece, spreading sound evenly around you room via its acoustic lens. As well as nailing the sound quality, the Danish brand considers its design, deftly crafting this speaker from aluminium that’s accentuated with a subtle green glow when you turn it on.",
+    "brandName": "Bang&Olufsen",
+    "quantity": 10,
+    "featured": true,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Speakers",
+      "subCat": "Home Theatre Speakers",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Beolab 18 Wireless Home Speakers",
+    "slug": "",
+    "photo": {
+      "filename": "beolab_18_wireless_speakers",
+      "url": "https://images.ctfassets.net/8cd2csgvqd3m/7Dqhqr8onqxPSejB4Ok97p/264d58cd4a5cb41c98abfcc7b128bea6/beolab-18-bronze.png?q=90&fm=webp&w=720&h=720&fit=fill"
+    },
+    "price": "6899.99",
+    "description": "The Beolab 18 loudspeakers from Bang & Olufsen are something of a sonic masterpiece, spreading sound evenly around you room via its acoustic lens. As well as nailing the sound quality, the Danish brand considers its design, deftly crafting this speaker from aluminium that’s accentuated with a subtle green glow when you turn it on.",
+    "brandName": "Bang&Olufsen",
+    "quantity": 10,
+    "featured": true,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Speakers",
+      "subCat": "Home Theatre Speakers",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Beolab 19 Subwoofer Speaker",
+    "slug": "",
+    "photo": {
+      "filename": "beolab_19_subwoofer_speaker",
+      "url": "https://images.ctfassets.net/8cd2csgvqd3m/7Dqhqr8onqxPSejB4Ok97p/264d58cd4a5cb41c98abfcc7b128bea6/beolab-18-bronze.png?q=90&fm=webp&w=720&h=720&fit=fill"
+    },
+    "price": "2400.00",
+    "description": "High-end wireless subwoofer bringing powerful bass and a unique sculptural design to your living room.",
+    "brandName": "Bang&Olufsen",
+    "quantity": 10,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Speakers",
+      "subCat": "Home Theatre Speakers",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Lifestyle® 650 home entertainment system",
+    "slug": "",
+    "photo": {
+      "filename": "650_home_entertainment_system",
+      "url": "https://assets.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/global/products/speakers/ls650_page/product_silo_images/lifestyle_650_black_EC_hero.psd/jcr:content/renditions/cq5dam.web.1000.1000.png"
+    },
+    "price": "2400.00",
+    "description": "Beauty's in the eye—and ear—of the beholder. So we designed the Lifestyle 650 home entertainment system to be beautiful in every way. Acoustics. Aesthetics. Craftsmanship. Simplicity. For your movies and music, it's the most uncompromising 5-speaker home cinema system we've ever made.",
+    "brandName": "Bose",
+    "quantity": 7,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Speakers",
+      "subCat": "Home Theatre Speakers",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Beovision Eclipse",
+    "slug": "",
+    "photo": {
+      "filename": "beovision_eclipse",
+      "url": "https://images.ctfassets.net/8cd2csgvqd3m/5GbnuCJjPm52L58QSCBupe/a274c650c173faddc4da9bda1d269a6e/eclipse-bronze.png?q=90&fm=webp&w=720&h=720&fit=fill"
+    },
+    "price": "6000.00",
+    "description": "Beovision Eclipse is a true OLED 4K HDR TV. The magic of the self-emitting OLED pixels is their ability to turn on and off individually to reproduce absolute black and infinite contrast, the most important aspects of your viewing experience.",
+    "brandName": "Bang&Olufsen",
+    "quantity": 14,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Televisions",
+      "subCat": "smart_tvs",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "LG 77' W9 OLED UltraHD TV",
+    "slug": "",
+    "photo": {
+      "filename": "lg_77'_w9_oled_ultrahd",
+      "url": "https://images.selfridges.com/is/image/selfridges/761-10044-LGOLED77W9PLA_ALT10?$PDP_M_ZOOM$&defaultImage=761-10044-LGOLED77W9PLA_M"
+    },
+    "price": "11000.00",
+    "description": "The 77' W9 OLED Ultra HD 4K HDR TV is designed to blend into the wall, bringing a mesmerising experience and aesthetic in your space.A feat only possible with uniquely sophisticated LG OLED TV technology.With a brand new 2nd gen α9 with AI, OLED display for the most accurate colour range, 4K HDR and with a full Dolby Vision & Atmos you can get a full cinematic experience in your home",
+    "brandName": "LG",
+    "quantity": 5,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Televisions",
+      "subCat": "oled",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Samsung Serif TV",
+    "slug": "",
+    "photo": {
+      "filename": "samsung_serif_tv",
+      "url": "https://images.selfridges.com/is/image/selfridges/5196-10209-QE49LS01RAUXXU_ALT10?$PDP_M_ZOOM$&defaultImage=5196-10209-QE49LS01RAUXXU_M"
+    },
+    "price": "1800.00",
+    "description": "The Serif is Samsung's brand new TV for 2019, giving you the best of both worlds by being incredibly stylish when off and packed with outstanding TV technologies when on. This is what we expect from Samsung QLED. Incredible picture quality meets sophisticated style. Isn’t your living room ready for something different?",
+    "brandName": "Samsung",
+    "quantity": 18,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Televisions",
+      "subCat": "oled",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Philips 4k UHD Smart Tv",
+    "slug": "",
+    "photo": {
+      "filename": "philips_4k_uhd_smart_tv",
+      "url": "https://images.selfridges.com/is/image/selfridges/R00038713_ALT10?$PDP_M_ZOOM$&defaultImage=R00038713_M"
+    },
+    "price": "1450.00",
+    "description": "With the Philips 55OLED754 4K UHD OLED smart TV, you get the true cinematic experience powered by Dolby Vision and Dolby Atmos. The brand’s Ambilight technology lights up the wall behind the screen in real time to make the drama feel deeper and the action feel bigger. Plus, the P5 Engine brings you a whole other level of visual experience that dazzles smooth motion and sharper pictures. Now, where's the remote?",
+    "brandName": "Philips",
+    "quantity": 18,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Televisions",
+      "subCat": "4k_ultra_hd",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Samsung Galaxy Watch 42mm Smartwatch",
+    "slug": "",
+    "photo": {
+      "filename": "samsung_galaxy_smartwatch",
+      "url": "https://images.samsung.com/is/image/samsung/ca-galaxy-watch-r815-sm-r815wzkaxac-frontblack-121029949?$PD_GALLERY_L_JPG$"
+    },
+    "price": "399.99",
+    "description": "Galaxy Watch is the smartwatch that helps you stay connected – wherever your day takes you. Galaxy Watch features Bluetooth connectivity and contextual information based on where you are, how you live and how you use your watch.",
+    "brandName": "Samsun",
+    "quantity": 28,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Watches",
+      "subCat": "SmartWatch",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Samsung Galaxy Watch Active2",
+    "slug": "",
+    "photo": {
+      "filename": "samsung_galaxy_active2_watch",
+      "url": "https://images.samsung.com/is/image/samsung/ca-galaxy-watch-active2-r820-sm-r820nzsaxac-frontcrownsilver-179669429?$PD_GALLERY_L_JPG$"
+    },
+    "price": "399.99",
+    "description": "Stay connected with a lifestyle partner on your wrist that gives you advice in the moment. Get smart advice on your fitness on a bigger screen with a watch that has your wellness in mind. Galaxy Watch Active2 tells you what you need to know when you need it.",
+    "brandName": "Samsung",
+    "quantity": 28,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Watches",
+      "subCat": "SmartWatch",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Gucci G-Timeless Stainless Steel Watch",
+    "slug": "",
+    "photo": {
+      "filename": "gucci_g-timeless_series",
+      "url": "https://images.selfridges.com/is/image/selfridges/759-10001-YA1264055_ALT10?$PDP_M_ZOOM$&defaultImage=759-10001-YA1264055_M"
+    },
+    "price": "1200.00",
+    "description": "Has there been a recent street style moment when Gucci wasn't involved? Under the creative direction of Alessandro Michele, there’s no doubt the Italian house has taken the industry by storm from high-end fashion to accessories. Add this yellow gold-plated watch to your wish list. From the G-Timeless collection, this Swiss-made design features a quartz movement and bee motif beneath the scratch-resistant sapphire crystal glass.",
+    "brandName": "Gucci",
+    "quantity": 18,
+    "featured": true,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Watches",
+      "subCat": "FashionWatch",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  },
+  {
+    "id": "",
+    "name": "Armani Exchange Yellow Gold Bracelet Watch",
+    "slug": "",
+    "photo": {
+      "filename": "armani_exchange",
+      "url": "https://images.selfridges.com/is/image/selfridges/759-10001-AX4327_ALT10?$PDP_M_ZOOM$&defaultImage=759-10001-AX4327_M"
+    },
+    "price": "289.99",
+    "description": "The style and class of Giorgio Armani for a younger generation, Armani Exchange has an enduring modern sensibility. Richly embellished with Swarovski stone on the indexes, this watch sports a mother-of-pearl dial. A study in timeless elegance, it's plated in yellow gold.",
+    "brandName": "Armani Exchange",
+    "quantity": 10,
+    "featured": false,
+    "avgRatings": 1,
+    "isActive": true,
+    "category": {
+      "parentCat": "Watches",
+      "subCat": "FashionWatch",
+      "parentCategory": "",
+      "subCategory": ""
+    }
+  }
+]

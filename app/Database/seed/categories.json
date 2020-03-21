@@ -24,15 +24,16 @@
       {"name": "Over-Ear", "imgUrl": ""},
       {"name": "On-Ear", "imgUrl": ""},
       {"name": "Wireless", "imgUrl": ""},
-      {"name": "Earbuds_&_In-ear", "imgUrl": ""}
+      {"name": "Around-Ear", "imgUrl": ""},
+      {"name": "In-ear", "imgUrl": ""}
     ]
   },
   {
     "name": "Watches",
     "imgUrl": "https://images.selfridges.com/is/image/selfridges/759-10001-ART5006_ALT01?$PLP_ALL$",
     "subcategories":[
-      {"name": "Fashion Watches", "imgUrl": ""},
-      {"name": "Smartwatches", "imgUrl": ""},
+      {"name": "FashionWatch", "imgUrl": ""},
+      {"name": "SmartWatch", "imgUrl": ""},
       {"name": "Fitness Tracking", "imgUrl": ""}      
     ]
   },
