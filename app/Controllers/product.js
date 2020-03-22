@@ -88,7 +88,8 @@ exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
   let { page, limit} = req.query;
   const { categoryId } = req.params;
   const category = await Category.findById(categoryId).select("-subcategories");
-  
+  const excludedFields = ["soldCount", "quantity", "author", "isActive"];
+
   if (!category) {
     let errMsg = "Invalid resource ID provided";
     return next(new ErrorResponse(errMsg, 404));

@@ -23,12 +23,12 @@ const ProductSchema = new Schema({
     required: true
   },
   slug: String,
-  soldCount: { default: 0, type: Number },
-  quantity: { type: Number, default: 0, required: true },
+  soldCount: { default: 0, type: Number, select: false },
+  quantity: { type: Number, default: 0, required: true, select: false },
   featured: { type: Boolean, default: false },
   photos: [{ filename: String, url: String }],
-  author: { type: Schema.Types.ObjectId, ref: 'User' },
-  isActive: {type: Boolean, default: false},
+  author: { type: Schema.Types.ObjectId, ref: 'User', select: false },
+  isActive: { type: Boolean, default: false, select: false },
   category: { 
     parentCategory: {type: Schema.Types.ObjectId, ref: 'Category'},
     subCategory: { type: Schema.Types.ObjectId, ref: 'Category' },
