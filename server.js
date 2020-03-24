@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const PORT = (process.env.PORT || 5000);
 const authRoute = require("./app/Routes/auth");
 const userRoute = require("./app/Routes/users");
+const orderRoute = require("./app/Routes/orders");
 const productRoute = require("./app/Routes/products");
 const categoryRoute = require("./app/Routes/categories");
 const errorHandler = require("./app/Utils/errorsHandler");
@@ -37,6 +38,7 @@ require("./app/Models/Category");
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/products", productRoute);
+app.use("/api/v1/orders", orderRoute);
 app.use("/api/v1/categories", categoryRoute);
 
 // ERROR HANDLING

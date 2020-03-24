@@ -134,7 +134,7 @@ exports.addToWishlist = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(errMsg, 404));
   };
 
-  const user = await User.findOneAndUpdate({ _id: req.currentuser.id }, { $addToSet: { wishlist: id } }, { new: true });
+  const user = await User.findOneAndUpdate({ _id: req.currentuser.id }, { $addToSet: { wishlist: id } }, { new: true }).populate("wishlist");
 
   const wishlist = user.wishlist;
   return res.status(200).json({ success: true, wishlist });
@@ -154,7 +154,7 @@ exports.removeWishlistItem = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(errMsg, 404));
   };
 
-  const user = await User.findOneAndUpdate({ _id: req.currentuser.id }, { $pull: { wishlist: id } }, { new: true });
+  const user = await User.findOneAndUpdate({ _id: req.currentuser.id }, { $pull: { wishlist: id } }, { new: true }).populate("wishlist");
 
   const wishlist = user.wishlist;
   return res.status(200).json({ success: true, wishlist });
