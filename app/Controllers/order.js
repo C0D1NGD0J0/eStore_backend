@@ -3,6 +3,7 @@ const User = require("../Models/User");
 const Product = require("../Models/Product");
 const ErrorResponse = require("../Utils/errorsResponse");
 const { asyncHandler } = require("../Utils/middlewares");
+const { sendEmail } = require("../Config/emailConfig");
 
 /*
 	Desc: Get all orders in the db 
@@ -22,14 +23,16 @@ exports.getAllOrders = asyncHandler(async (req, res, next) => {
 	access: Private
 */
 exports.createOrder = asyncHandler(async (req, res, next) => {
-  const { items, transactionId, total, address } = req.body;
+  const { items, transactionId, purchaseTotal, address, costBreakdown } = req.body;
   const currentuser = await User.findById(req.currentuser._id);
 
-  const updatedItems = items.map((item) =>{
+  const updatedCartItems = items.map((item) =>{
     return {
       product: item._id,
       price: item.price,
       quantity: item.qty,
+      name: item.name,
+      photo: item.photos[0].url
     };
   });
 
@@ -40,16 +43,29 @@ exports.createOrder = asyncHandler(async (req, res, next) => {
     await product.save();
   });
 
+  //create new order 
   const order = new Order();
-  order.products = await updatedItems;
+  order.products = updatedCartItems;
   order.transactionId = transactionId;
-  order.totalAmount = total;
+  order.totalAmount = purchaseTotal;
   order.shippingAddress = address;
+  order.costBreakdown = costBreakdown;
   order.owner = req.currentuser._id;
 
   await order.save();
   currentuser.purchaseHistory.push(order._id);
   await currentuser.save({ validateBeforeSave: false });
+
+  //email user regarding their order
+  const mailOptions = {
+    order,
+    orderItems: updatedCartItems,
+    customer: currentuser.fullname,
+    emailType: "new_order",
+    email: currentuser.email,
+    subject: "House of Anasa: Recently Placed Order"
+  };
+  await sendEmail(mailOptions, req, next);
 
   return res.status(200).json({ success: true, order });
 });

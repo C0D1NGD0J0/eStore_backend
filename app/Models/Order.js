@@ -10,9 +10,10 @@ const CartItemSchema = new Schema({
 
 const OrderSchema = new Schema({
   products: { type: [CartItemSchema]},
-  transactionId: {},
+  transactionId: String,
   totalAmount: { type: Number },
   shippingAddress: String,
+  costBreakdown: {},
   status: {
     type: String,
     default: "processing",

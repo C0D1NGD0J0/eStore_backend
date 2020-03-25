@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=E, initial-scale=1.0">
+  <title>H.O.A: <%= order.customer %> Order</title>
+  <style>
+    .cart-table {
+      font-family: 'Spartan', sans-serif !important;
+    }
+
+    .cart-table__img {
+      width: 150px;
+      height: 120px;
+      margin: 0 auto;
+      max-width: 150px;
+      max-height: 120px;
+    }
+
+    .cart-table>tbody>tr>td {
+      line-height: 1.4;
+      vertical-align: middle;
+      text-transform: uppercase;
+    }
+
+    .cart-table__img {
+      margin: 0 auto;
+      max-width: 14;
+      min-height: 12rem;
+    }
+
+    .cart-table .p-qty {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    td {
+      line-height: 1.5;
+      vertical-align: middle;
+      font-size: 1.4rem;
+    }
+
+    td .fa {
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="account-myOrders">
+    <div class="account-myOrders__header">
+      <h2>Order #<%= order._id %></h2>
+      <p class="lead">Your order was placed on <%= order.createdAt %> and is currently being <span class="background-warning"><%= order.status %></span></p>
+      <p class="text-muted">If you have any questions, please feel free to contact us, our customer service center is available 24/7.</p>
+    </div>
+  
+    <div class="account-myOrders__table">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th colspan="2">Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% orderItems.forEach((item) =>{ %>
+            <tr>
+              <td><img class="cart-table__img" src="<%= item.photo %>" alt="<%= item.name %>" /></td>
+              <td><%= item.name %></td>
+              <td>$<%= item.price %></td>
+              <td style="text-align:center;"><%= item.quantity %></td>
+              <td>$<%= item.quantity * item.price %></td>
+            </tr>
+          <% }) %>
+          
+          <tr>
+            <td colspan="3"></td>
+            <td>
+              <h4>Sub-total</h4>
+            </td>
+            <td>$<%= order.costBreakdown.subtotal%></td>
+          </tr>
+
+          <tr>
+            <td colspan="3"></td>
+            <td>
+              <h4>Tax</h4>
+            </td>
+            <td>$<%= order.costBreakdown.tax %></td>
+          </tr>
+          
+          <tr>
+            <td colspan="3"></td>
+            <td>
+              <h3>Total</h3>
+            </td>
+            <td>$<%= order.totalAmount %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="shipping-info">
+        <h4>Shipping Info:</h4>
+        <p><%= order.shippingAddress %></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

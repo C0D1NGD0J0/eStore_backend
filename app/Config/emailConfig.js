@@ -1,3 +1,4 @@
+const ejs = require("ejs");
 const nodemailer = require("nodemailer");
 const ErrorResponse = require("../Utils/errorsResponse");
 
@@ -26,13 +27,14 @@ function transporterSetup() {
   return transporter;
 };
 
-function mailOptions(opts, req) {
+async function mailOptions(opts, req) {
   if(!req || !opts){
-    throw new Error("Please provide proper argumants");
+    throw new Error("expected 2 arguments...");
   };
 
   const activationURL = `${process.env.FRONTEND_URL}/auth/account_activation/${opts.token}`;
   const pwdResetURL = `${process.env.FRONTEND_URL}/auth/reset_password/${opts.token}`;
+  const data = await ejs.renderFile(__dirname + "/orderEmail.ejs", { order: opts.order, customer: opts.customer, orderItems: opts.orderItems });
 
   const emailTemplate = {
     account_activation: `<h1>Activate your House of Anasa Account</h1><hr>
@@ -41,8 +43,8 @@ function mailOptions(opts, req) {
 			<h5>Thank You.</h5>`,
     password_reset: `<h1>Password Reset</h1><br>
     <p>You are receiving this email because you (or someone else) has requested to reset your password. Please click on the link provided to complete the process: <a href=${pwdResetURL}>Reset Password</a><br>
-			<h5>If you didn't request this, please kindly ignore this email and your password will remain unchanged".</h5>
-			`
+      <h5>If you didn't request this, please kindly ignore this email and your password will remain unchanged".</h5>`,
+    new_order: data
   };
 
   const messageInfo = {
@@ -57,10 +59,8 @@ function mailOptions(opts, req) {
 
 exports.sendEmail = async (options, req, next) => {
   const transporter = transporterSetup();
-  const messageInfo = mailOptions(options, req);
-
-  console.log(messageInfo);
-
+  const messageInfo = await mailOptions(options, req);
+  
   // sendmail
   if (process.env.NODE_ENV !== 'production') {
     try {
