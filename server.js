@@ -32,6 +32,7 @@ require("./app/Database/")();
 // MODELS
 require("./app/Models/User");
 require("./app/Models/Product");
+require("./app/Models/Order");
 require("./app/Models/Category");
 
 

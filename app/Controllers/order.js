@@ -1,4 +1,6 @@
-//const Order = require("../Models/Order");
+const {Order, CartItem} = require("../Models/Order");
+const User = require("../Models/User");
+const Product = require("../Models/Product");
 const ErrorResponse = require("../Utils/errorsResponse");
 const { asyncHandler } = require("../Utils/middlewares");
 
@@ -20,7 +22,36 @@ exports.getAllOrders = asyncHandler(async (req, res, next) => {
 	access: Private
 */
 exports.createOrder = asyncHandler(async (req, res, next) => {
-  return res.status(200).json({ success: true });
+  const { items, transactionId, total, address } = req.body;
+  const currentuser = await User.findById(req.currentuser._id);
+
+  const updatedItems = items.map((item) =>{
+    return {
+      product: item._id,
+      price: item.price,
+      quantity: item.qty,
+    };
+  });
+
+  //update product soldCount
+  items.map(async (item) =>{
+    const product = await Product.findById(item._id).select("+soldCount");
+    product.soldCount = product.soldCount + item.qty;
+    await product.save();
+  });
+
+  const order = new Order();
+  order.products = await updatedItems;
+  order.transactionId = transactionId;
+  order.totalAmount = total;
+  order.shippingAddress = address;
+  order.owner = req.currentuser._id;
+
+  await order.save();
+  currentuser.purchaseHistory.push(order._id);
+  await currentuser.save({ validateBeforeSave: false });
+
+  return res.status(200).json({ success: true, order });
 });
 
 /*
