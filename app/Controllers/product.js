@@ -68,7 +68,7 @@ exports.createProduct = asyncHandler(async (req, res, next) => {
 exports.getProduct = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
 
-  const product = await Product.findById(id);
+  const product = await Product.findById(id).lean();
 
   if (!product) {
     let errMsg = "Invalid resource ID provided";
@@ -76,6 +76,25 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
   };
 
   return res.status(200).json({ success: true, product });
+});
+
+/*
+	Desc: Get related products based parent category
+	route: GET /api/v1/products/:id/related_products/category/:categoryId
+	access: Public
+*/
+exports.relatedProducts = asyncHandler( async (req, res, next) => {
+  const limit = 4;
+  const { id, categoryId } = req.params;
+
+  const products = await Product.find({ _id: { $ne: id }, "category.parentCategory": categoryId }).limit(limit).select("name photos price slug");
+  
+  if (!products) {
+    let errMsg = "Invalid resource ID provided";
+    return next(new ErrorResponse(errMsg, 404));
+  };
+
+  return res.status(200).json({ success: true, products });
 });
 
 /*
@@ -97,7 +116,7 @@ exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
   
   // pagination
   page = parseInt(page, 10) || 1;
-  limit = parseInt(limit, 10) || 2;
+  limit = parseInt(limit, 10) || 3;
   skip = (page - 1) * limit;
 
   const products = await Product.find({ isActive: true, "category.parentCategory": category._id }).skip(skip).limit(limit);
