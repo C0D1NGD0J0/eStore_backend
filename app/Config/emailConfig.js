@@ -28,13 +28,17 @@ function transporterSetup() {
 };
 
 async function mailOptions(opts, req) {
+  let data;
   if(!req || !opts){
     throw new Error("expected 2 arguments...");
   };
 
   const activationURL = `${process.env.FRONTEND_URL}/auth/account_activation/${opts.token}`;
   const pwdResetURL = `${process.env.FRONTEND_URL}/auth/reset_password/${opts.token}`;
-  const data = await ejs.renderFile(__dirname + "/orderEmail.ejs", { order: opts.order, customer: opts.customer, orderItems: opts.orderItems });
+  
+  if (opts.emailType === "new_order"){
+    data = await ejs.renderFile(__dirname + "/orderEmail.ejs", { order: opts.order, customer: opts.customer, orderItems: opts.orderItems });
+  };
 
   const emailTemplate = {
     account_activation: `<h1>Activate your House of Anasa Account</h1><hr>

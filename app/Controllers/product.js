@@ -1,6 +1,7 @@
 const User = require("../Models/User");
 const Product = require("../Models/Product");
 const Category = require("../Models/Category");
+const slugify = require("slugify");
 const ErrorResponse = require("../Utils/errorsResponse");
 const { asyncHandler } = require("../Utils/middlewares");
 const { paginateResult } = require("../Utils/helperFn");
@@ -196,14 +197,16 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
 
   let productUpdate = {
     isActive,
-    name: name ? name : product.name ,
-    featured: featured ? featured : product.featured ,
-    brandName: brandName ? brandName : product.brandName ,
-    description: description ? description : product.description ,
+    name: name ? name : product.name,
+    featured: featured ? featured : product.featured,
+    brandName: brandName ? brandName : product.brandName,
+    description: description ? description : product.description,
     price: price ? parseFloat(price) : product.price,
     photos: [...product.photos],
     quantity: quantity ? parseInt(quantity) : product.quantity
   };
+
+  productUpdate.slug = slugify(productUpdate.name, { lower: true, replacement: '_' });
 
   if(photo){
     productUpdate.photos = [...productUpdate.photos, photo];

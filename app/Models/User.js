@@ -22,6 +22,7 @@ const UserSchema = new Schema({
   },
   email: {
     type: String,
+    index: true,
     required: [true, 'Please provide an email address.'],
     unique: true,
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please add a valid email']
@@ -50,7 +51,7 @@ const UserSchema = new Schema({
     select: false
   },
   isActive: { type: Boolean, default: false },
-  purchaseHistory: { type: Array, default: [] },
+  purchaseHistory: [{ type: Schema.Types.ObjectId, ref: 'Order'}],
   activationToken: { type: String, default: "" },
   passwordResetToken: { type: String, default: "" },
   passwordResetExpires: { type: Date, default: "" },
@@ -79,6 +80,7 @@ UserSchema.methods.profile = async function(){
   return {
     role: this.role,
     email: this.email,
+    phone: this.phone,
     wishlist: this.wishlist,
     fullname: this.fullname,
     purchaseHistory: this.purchaseHistory

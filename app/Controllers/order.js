@@ -1,4 +1,4 @@
-const {Order, CartItem} = require("../Models/Order");
+const {Order} = require("../Models/Order");
 const User = require("../Models/User");
 const Product = require("../Models/Product");
 const ErrorResponse = require("../Utils/errorsResponse");
@@ -11,9 +11,6 @@ const { sendEmail } = require("../Config/emailConfig");
 	access: Private (Admin)
 */
 exports.getAllOrders = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.currentuser.id).populate("wishlist", "name price photos");
-  const currentuser = await user.profile();
-
   return res.status(200).json({ success: true, currentuser });
 });
 
@@ -85,7 +82,27 @@ exports.updateOrderStatus = asyncHandler(async (req, res, next) => {
 	access: Private
 */
 exports.getSingleOrder = asyncHandler(async (req, res, next) => {
-  return res.status(200).json({ success: true });
+  const { id } = req.params;
+
+  let order = await Order.findById(id).lean();
+  const orderProductsId = order.products.map((item) => (item.product));
+  const orderProducts = await Product.find().where("_id").in(orderProductsId).lean().select("name price photos").exec();
+
+  if (!order) {
+    let errMsg = "Invalid resource ID provided";
+    return next(new ErrorResponse(errMsg, 404));
+  };
+
+  order.products = orderProducts.map((p, idx) =>{
+    if(p._id.toString() === order.products[idx].product.toString()){
+      return {
+        ...p,
+        ...order.products[idx]
+      }
+    };
+  });
+
+  return res.status(200).json({ success: true, order });
 });
 
 /*

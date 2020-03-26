@@ -8,6 +8,7 @@ const ProductSchema = new Schema({
     type: String,
     maxlength: 70,
     unique: true,
+    index: true,
     lowercase: true,
     required: [true, 'Product Name is required!']
   },

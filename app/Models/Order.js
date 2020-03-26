@@ -9,7 +9,7 @@ const CartItemSchema = new Schema({
 }, { timestamps: true });
 
 const OrderSchema = new Schema({
-  products: { type: [CartItemSchema]},
+  products: [CartItemSchema],
   transactionId: String,
   totalAmount: { type: Number },
   shippingAddress: String,
