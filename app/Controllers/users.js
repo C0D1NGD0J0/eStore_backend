@@ -33,7 +33,7 @@ exports.updateAccount = asyncHandler(async (req, res, next) =>{
     updateData.password = password;
   };
 
-  let currentuser = await User.findByIdAndUpdate(req.currentuser.id, updateData, {new: true});
+  let currentuser = await User.findByIdAndUpdate(req.currentuser.id, updateData, { new: true }).populate("purchaseHistory", "status totalAmount createdAt");
   currentuser = await currentuser.profile();
 
   return res.status(200).json({ success: true, currentuser });
