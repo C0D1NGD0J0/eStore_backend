@@ -3,7 +3,7 @@ const isProduction = (process.env.NODE_ENV === "production");
 
 const connectDB = async () => {
   try {
-    if (!isProduction) {
+    if (isProduction) {
       await mongoose.connect(process.env.MONGODB_URI, { 
         useNewUrlParser: true,
         useCreateIndex: true, 
