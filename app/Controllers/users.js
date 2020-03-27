@@ -8,7 +8,7 @@ const { asyncHandler } = require("../Utils/middlewares");
 	access: Public
 */
 exports.getCurrentUser = asyncHandler(async(req, res, next) =>{
-  const user = await User.findById(req.currentuser.id).populate("purchaseHistory", "status totalAmount createdAt");
+  const user = await User.findById(req.currentuser.id).populate("purchaseHistory", "status totalAmount createdAt").populate("wishlist", "name price photos");
   const currentuser = await user.profile();
   
   return res.status(200).json({ success: true, currentuser });
