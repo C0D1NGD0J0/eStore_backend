@@ -11,7 +11,10 @@ const { sendEmail } = require("../Config/emailConfig");
 	access: Private (Admin)
 */
 exports.getAllOrders = asyncHandler(async (req, res, next) => {
-  return res.status(200).json({ success: true, currentuser });
+  const user = await User.findById(req.currentuser._id).populate("purchaseHistory", "status totalAmount createdAt");
+  const orders = user.purchaseHistory;
+
+  return res.status(200).json({ success: true, orders });
 });
 
 /*
