@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { isAuthorized } = require("../Utils/middlewares");
 const { validateProduct, execValidations } = require("../Utils/validations");
 const { getAllProducts, createProduct, getCategoryProducts, featuredProducts, addToWishlist, getProduct, updateProduct, toggleProductStatus, deleteProduct, removeWishlistItem, relatedProducts } = require("../Controllers/product.js");
+const reviewRouter = require("./reviews");
 
 router.route("/")
   .get(getAllProducts)
@@ -17,5 +18,7 @@ router.route("/:id")
   .get(getProduct)
   .put(updateProduct)
   .delete(deleteProduct);
+
+router.use("/:id/reviews", reviewRouter);
 
 module.exports = router;

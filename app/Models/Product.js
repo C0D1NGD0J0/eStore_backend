@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
+const mongooseLeanVirtuals = require('mongoose-lean-virtuals');
 
 const ProductSchema = new Schema({
   name: {
@@ -35,9 +36,15 @@ const ProductSchema = new Schema({
     subCategory: { type: Schema.Types.ObjectId, ref: 'Category' },
   },
   brandName: { type: String, trim: true, minlength: 2, maxlength: 25, lowercase: true, required: true },
-  avgRatings: { type: Number, min: [1, 'Product rating must be at least 1'], max: [5, "Rating cann't be greater than 5"]}
-}, { timestamps: true });
+  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
+  avgRatings: { type: Number, min: [1, 'Rating must be at least 1'], max: [5, "Rating cannot be greater than 5"], default: 0 }
+}, { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } });
 
 ProductSchema.plugin(uniqueValidator);
+ProductSchema.plugin(mongooseLeanVirtuals);
+
+ProductSchema.virtual('inStock').get(function () {
+  return this.quantity - this.soldCount;
+});
 
 module.exports = mongoose.model('Product', ProductSchema);

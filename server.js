@@ -9,6 +9,7 @@ const userRoute = require("./app/Routes/users");
 const orderRoute = require("./app/Routes/orders");
 const productRoute = require("./app/Routes/products");
 const paymentRoute = require("./app/Routes/payments");
+const reviewRoute = require("./app/Routes/reviews");
 const categoryRoute = require("./app/Routes/categories");
 const errorHandler = require("./app/Utils/errorsHandler");
 const app = express();  
@@ -42,6 +43,7 @@ app.use("/api/v1/users", userRoute);
 app.use("/api/v1/products", productRoute);
 app.use("/api/v1/orders", orderRoute);
 app.use("/api/v1/payments", paymentRoute);
+app.use("/api/v1/reviews", reviewRoute);
 app.use("/api/v1/categories", categoryRoute);
 
 // ERROR HANDLING

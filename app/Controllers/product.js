@@ -1,5 +1,6 @@
 const User = require("../Models/User");
 const Product = require("../Models/Product");
+const Review = require("../Models/Review");
 const Category = require("../Models/Category");
 const slugify = require("slugify");
 const ErrorResponse = require("../Utils/errorsResponse");
@@ -69,14 +70,17 @@ exports.createProduct = asyncHandler(async (req, res, next) => {
 exports.getProduct = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
 
-  const product = await Product.findById(id).lean();
-
+  let product = await Product.findById(id).select("+soldCount +quantity").lean({virtuals: true});
+  
   if (!product) {
     let errMsg = "Invalid resource ID provided";
     return next(new ErrorResponse(errMsg, 404));
   };
 
-  return res.status(200).json({ success: true, product });
+  const {soldCount, quantity, ...others} = product;
+  const reviews = await Review.find({ product: id }).populate("author", "firstName lastName");;
+  
+  return res.status(200).json({ success: true, product: others, reviews });
 });
 
 /*
@@ -85,7 +89,7 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
 	access: Public
 */
 exports.relatedProducts = asyncHandler( async (req, res, next) => {
-  const limit = 4;
+  const limit = 3;
   const { id, categoryId } = req.params;
 
   const products = await Product.find({ _id: { $ne: id }, "category.parentCategory": categoryId }).limit(limit).select("name photos price slug");
@@ -108,7 +112,7 @@ exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
   let { page, limit} = req.query;
   const { categoryId } = req.params;
   const category = await Category.findById(categoryId).select("-subcategories");
-  const excludedFields = ["soldCount", "quantity", "author", "isActive"];
+  //const excludedFields = ["soldCount", "quantity", "author", "isActive"];
 
   if (!category) {
     let errMsg = "Invalid resource ID provided";
