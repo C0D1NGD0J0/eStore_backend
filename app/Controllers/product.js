@@ -12,10 +12,10 @@ const { paginateResult } = require("../Utils/helperFn");
 	route: GET /api/v1/products/
 	access: Private
 */
-exports.getAllProducts = asyncHandler(async (req, res, next) =>{
+exports.getAllProducts = asyncHandler(async (req, res, next) => {
   let query, skip;
-  let { page, limit, sortBy } = req.query;
-  
+  let { page, limit } = req.query;
+
   // pagination
   page = parseInt(page, 10) || 1;
   limit = parseInt(limit, 10) || 1;
@@ -41,12 +41,12 @@ exports.createProduct = asyncHandler(async (req, res, next) => {
   const { name, photo, price, description, brandName, quantity, featured, parentCategoryId, childCategoryId, isactive } = req.body;
 
   let product = {
-    name, 
-    featured, 
-    brandName, 
+    name,
+    featured,
+    brandName,
     description,
     isActive: isactive,
-    price: parseFloat(price), 
+    price: parseFloat(price),
     author: req.currentuser._id,
     quantity: parseInt(quantity)
   };
@@ -70,16 +70,16 @@ exports.createProduct = asyncHandler(async (req, res, next) => {
 exports.getProduct = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
 
-  let product = await Product.findById(id).select("+soldCount +quantity").lean({virtuals: true});
-  
+  let product = await Product.findById(id).select("+soldCount +quantity").lean({ virtuals: true });
+
   if (!product) {
     let errMsg = "Invalid resource ID provided";
     return next(new ErrorResponse(errMsg, 404));
   };
 
-  const {soldCount, quantity, ...others} = product;
+  const { soldCount, quantity, ...others } = product;
   const reviews = await Review.find({ product: id }).populate("author", "firstName lastName");;
-  
+
   return res.status(200).json({ success: true, product: others, reviews });
 });
 
@@ -88,12 +88,12 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
 	route: GET /api/v1/products/:id/related_products/category/:categoryId
 	access: Public
 */
-exports.relatedProducts = asyncHandler( async (req, res, next) => {
+exports.relatedProducts = asyncHandler(async (req, res, next) => {
   const limit = 3;
   const { id, categoryId } = req.params;
 
   const products = await Product.find({ _id: { $ne: id }, "category.parentCategory": categoryId }).limit(limit).select("name photos price slug");
-  
+
   if (!products) {
     let errMsg = "Invalid resource ID provided";
     return next(new ErrorResponse(errMsg, 404));
@@ -109,7 +109,7 @@ exports.relatedProducts = asyncHandler( async (req, res, next) => {
 */
 exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
   let skip;
-  let { page, limit} = req.query;
+  let { page, limit } = req.query;
   const { categoryId } = req.params;
   const category = await Category.findById(categoryId).select("-subcategories");
   //const excludedFields = ["soldCount", "quantity", "author", "isActive"];
@@ -118,7 +118,7 @@ exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
     let errMsg = "Invalid resource ID provided";
     return next(new ErrorResponse(errMsg, 404));
   };
-  
+
   // pagination
   page = parseInt(page, 10) || 1;
   limit = parseInt(limit, 10) || 3;
@@ -126,9 +126,9 @@ exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
 
   const products = await Product.find({ isActive: true, "category.parentCategory": category._id }).skip(skip).limit(limit);
 
-  const count = await Product.countDocuments({"category.parentCategory": category._id});
+  const count = await Product.countDocuments({ "category.parentCategory": category._id });
   const pagination = paginateResult(count, skip, limit);
-  
+
   return res.status(200).json({ success: true, pagination, products });
 });
 
@@ -138,7 +138,7 @@ exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
 	access: Public
 */
 exports.featuredProducts = asyncHandler(async (req, res, next) => {
-  const products = await Product.find({featured: true}).select("id name price photos");
+  const products = await Product.find({ featured: true }).select("id name price photos");
   const count = products.length;
 
   return res.status(200).json({ success: true, count, products });
@@ -153,7 +153,7 @@ exports.addToWishlist = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
 
   const product = await Product.findById(id);
-  if(!product){
+  if (!product) {
     let errMsg = "Invalid resource ID provided";
     return next(new ErrorResponse(errMsg, 404));
   };
@@ -212,7 +212,7 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
 
   productUpdate.slug = slugify(productUpdate.name, { lower: true, replacement: '_' });
 
-  if(photo){
+  if (photo) {
     productUpdate.photos = [...productUpdate.photos, photo];
   };
 
@@ -258,4 +258,31 @@ exports.deleteProduct = asyncHandler(async (req, res, next) => {
   };
 
   return res.status(200).json({ success: true });
+});
+
+/*
+	Desc: Delete single product
+	route: GET /api/v1/products/search
+	access: Public
+*/
+exports.searchProducts = asyncHandler(async (req, res, next) => {
+  let query, skip;
+  let { orderBy, sortBy, limit, searchQuery, page } = req.query;
+
+  // pagination
+  page = parseInt(page, 10) || 1;
+  limit = parseInt(limit, 10) || 15;
+  skip = (page - 1) * limit;
+
+  const products = await Product.find({ $text: { $search: searchQuery } }, { searchGrade: { $meta: 'textScore' } }).select("name price brandName category").skip(skip).limit(limit).sort({ searchGrade: { $meta: 'textScore' } });
+
+  if (!products) {
+    let errMsg = "Resource not found with ID provided";
+    return next(new ErrorResponse(errMsg, 400));
+  };
+
+  const count = products.length;
+  const pagination = paginateResult(count, skip, limit);
+
+  return res.status(200).json({ success: true, products, pagination });
 });

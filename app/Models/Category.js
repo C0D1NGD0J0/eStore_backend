@@ -33,12 +33,12 @@ const CategorySchema = new Schema({
 CategorySchema.pre("save", function (next) {
   this.slug = slugify(this.name, { lower: true, replacement: '_' });
 
-  if(this.subcategories){
-    this.subcategories.map((cat) =>{
+  if (this.subcategories) {
+    this.subcategories.map((cat) => {
       cat.slug = slugify(cat.name, { lower: true, replacement: '_' });
     });
   };
-  
+
   next();
 });
 
@@ -49,9 +49,14 @@ CategorySchema.statics.getSubCategorysList = function () {
   ]);
 };
 
-//CategorySchema.methods.getSubCategories = async function(subCatId){
-//  const result = await this.model('Category').findById(this._id).subcategories;
-//  return result;
-//};
+CategorySchema.methods.getSubCategories = async function (subCatId) {
+  const result = await this.model('Category').findById(this._id).subcategories;
+  return result;
+};
+
+CategorySchema.statics.getSubCategory = async function (subCatId) {
+  const parent = await this.model('Category').findOne({ 'subcategories._id': subCatId });
+  return parent.subcategories.id(subCatId);
+};
 
 module.exports = mongoose.model("Category", CategorySchema);

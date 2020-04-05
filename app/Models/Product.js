@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Category = require("./Category");
 const uniqueValidator = require('mongoose-unique-validator');
 const mongooseLeanVirtuals = require('mongoose-lean-virtuals');
 
@@ -9,7 +10,6 @@ const ProductSchema = new Schema({
     type: String,
     maxlength: 70,
     unique: true,
-    index: true,
     lowercase: true,
     required: [true, 'Product Name is required!']
   },
@@ -31,8 +31,8 @@ const ProductSchema = new Schema({
   photos: [{ filename: String, url: String }],
   author: { type: Schema.Types.ObjectId, ref: 'User', select: false },
   isActive: { type: Boolean, default: false, select: false },
-  category: { 
-    parentCategory: {type: Schema.Types.ObjectId, ref: 'Category'},
+  category: {
+    parentCategory: { type: Schema.Types.ObjectId, ref: 'Category' },
     subCategory: { type: Schema.Types.ObjectId, ref: 'Category' },
   },
   brandName: { type: String, trim: true, minlength: 2, maxlength: 25, lowercase: true, required: true },
@@ -46,5 +46,16 @@ ProductSchema.plugin(mongooseLeanVirtuals);
 ProductSchema.virtual('inStock').get(function () {
   return this.quantity - this.soldCount;
 });
+
+ProductSchema.methods.getSubCategoryInfo = async function () {
+  return await Category.getSubCategory(this.category.subCategory);
+};
+
+ProductSchema.index({
+  name: 'text',
+  brandName: 'text',
+  description: 'text'
+});
+
 
 module.exports = mongoose.model('Product', ProductSchema);
