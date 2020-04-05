@@ -18,7 +18,7 @@ exports.getAllProducts = asyncHandler(async (req, res, next) => {
 
   // pagination
   page = parseInt(page, 10) || 1;
-  limit = parseInt(limit, 10) || 1;
+  limit = parseInt(limit, 10) || 9;
   skip = (page - 1) * limit;
 
   query = {};
@@ -77,10 +77,10 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(errMsg, 404));
   };
 
-  const { soldCount, quantity, ...others } = product;
+  //const { soldCount, quantity, ...others } = product;
   const reviews = await Review.find({ product: id }).populate("author", "firstName lastName");;
 
-  return res.status(200).json({ success: true, product: others, reviews });
+  return res.status(200).json({ success: true, product, reviews });
 });
 
 /*
@@ -266,7 +266,7 @@ exports.deleteProduct = asyncHandler(async (req, res, next) => {
 	access: Public
 */
 exports.searchProducts = asyncHandler(async (req, res, next) => {
-  let query, skip;
+  let skip;
   let { orderBy, sortBy, limit, searchQuery, page } = req.query;
 
   // pagination
