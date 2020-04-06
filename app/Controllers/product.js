@@ -14,7 +14,7 @@ const { paginateResult } = require("../Utils/helperFn");
 */
 exports.getAllProducts = asyncHandler(async (req, res, next) => {
   let query, skip;
-  let { page, limit } = req.query;
+  let { page, limit, sortBy } = req.query;
 
   // pagination
   page = parseInt(page, 10) || 1;
@@ -22,7 +22,7 @@ exports.getAllProducts = asyncHandler(async (req, res, next) => {
   skip = (page - 1) * limit;
 
   query = {};
-  const products = await Product.find(query).skip(skip).limit(limit).populate({
+  const products = await Product.find(query).sort(sortBy).skip(skip).limit(limit).populate({
     path: "category.parentCategory",
     select: "slug"
   });
@@ -108,12 +108,11 @@ exports.relatedProducts = asyncHandler(async (req, res, next) => {
 	access: Public
 */
 exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
-  let skip;
-  let { page, limit } = req.query;
+  let skip, products;
   const { categoryId } = req.params;
+  let { page, limit, sortBy } = req.query;
   const category = await Category.findById(categoryId).select("-subcategories");
-  //const excludedFields = ["soldCount", "quantity", "author", "isActive"];
-
+  
   if (!category) {
     let errMsg = "Invalid resource ID provided";
     return next(new ErrorResponse(errMsg, 404));
@@ -124,7 +123,11 @@ exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
   limit = parseInt(limit, 10) || 3;
   skip = (page - 1) * limit;
 
-  const products = await Product.find({ isActive: true, "category.parentCategory": category._id }).skip(skip).limit(limit);
+  if(sortBy){
+    products = await Product.find({ isActive: true, "category.parentCategory": category._id }).sort(sortBy).skip(skip).limit(limit);
+  }else {
+    products = await Product.find({ isActive: true, "category.parentCategory": category._id }).skip(skip).limit(limit);
+  };
 
   const count = await Product.countDocuments({ "category.parentCategory": category._id });
   const pagination = paginateResult(count, skip, limit);
@@ -274,7 +277,7 @@ exports.searchProducts = asyncHandler(async (req, res, next) => {
   limit = parseInt(limit, 10) || 15;
   skip = (page - 1) * limit;
 
-  const products = await Product.find({ $text: { $search: searchQuery } }, { searchGrade: { $meta: 'textScore' } }).select("name price brandName category").skip(skip).limit(limit).sort({ searchGrade: { $meta: 'textScore' } });
+  const products = await Product.find({ $text: { $search: searchQuery } }, { searchGrade: { $meta: 'textScore' } }).select("name price brandName category photos").skip(skip).limit(limit).sort({ searchGrade: { $meta: 'textScore' } });
 
   if (!products) {
     let errMsg = "Resource not found with ID provided";
