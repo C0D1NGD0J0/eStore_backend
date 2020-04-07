@@ -15,6 +15,7 @@ const categoryRoute = require("./app/Routes/categories");
 const errorHandler = require("./app/Utils/errorsHandler");
 const mongoSanitize = require('express-mongo-sanitize');
 const rateLimit = require("express-rate-limit");
+const helmet = require('helmet');
 const hpp = require('hpp');
 const app = express();  
 
@@ -25,7 +26,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // MIDDLEWARE
 app.use(cors({
-  origin: 'https://friendly-golick-ef1d7d.netlify.com',
+  origin: '*',
   optionsSuccessStatus: 200
 }));
 app.use(bodyParser.json());

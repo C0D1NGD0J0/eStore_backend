@@ -277,7 +277,11 @@ exports.searchProducts = asyncHandler(async (req, res, next) => {
   limit = parseInt(limit, 10) || 15;
   skip = (page - 1) * limit;
 
-  const products = await Product.find({ $text: { $search: searchQuery } }, { searchGrade: { $meta: 'textScore' } }).select("name price brandName category photos").skip(skip).limit(limit).sort({ searchGrade: { $meta: 'textScore' } });
+  //full text search
+  //const products = await Product.find({ $text: { $search: searchQuery } }, { searchGrade: { $meta: 'textScore' } }).select("name price brandName category photos").skip(skip).limit(limit).sort({ searchGrade: { $meta: 'textScore' } });
+
+  //partial text search
+  const products = await Product.find({ $or: [{ name: { $regex: searchQuery, "$options": 'i' } }, { brandName: { $regex: searchQuery, "$options": 'i' } } ]}).select("name price brandName category photos").skip(skip).limit(limit);
 
   if (!products) {
     let errMsg = "Resource not found with ID provided";

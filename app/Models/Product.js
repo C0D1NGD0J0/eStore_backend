@@ -53,7 +53,6 @@ ProductSchema.methods.getSubCategoryInfo = async function () {
 
 ProductSchema.index({
   name: 'text',
-  brandName: 'text',
   description: 'text'
 });
 
