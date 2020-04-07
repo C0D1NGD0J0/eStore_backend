@@ -120,7 +120,7 @@ exports.getCategoryProducts = asyncHandler(async (req, res, next) => {
 
   // pagination
   page = parseInt(page, 10) || 1;
-  limit = parseInt(limit, 10) || 3;
+  limit = parseInt(limit, 10) || 9;
   skip = (page - 1) * limit;
 
   if(sortBy){
