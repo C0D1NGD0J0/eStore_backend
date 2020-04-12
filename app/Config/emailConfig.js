@@ -66,7 +66,7 @@ exports.sendEmail = async (options, req, next) => {
   const messageInfo = await mailOptions(options, req);
   
   // sendmail
-  if (process.env.NODE_ENV !== 'production') {
+  //if (process.env.NODE_ENV == 'production') {
     try {
       const info = await transporter.sendMail(messageInfo);
       return console.log("Message sent: %s", info.messageId);
@@ -74,5 +74,5 @@ exports.sendEmail = async (options, req, next) => {
       console.log("MAIL ERROR: ", err);
       return next(new ErrorResponse(err.message, 400));
     };
-  };
+  //};
 };
