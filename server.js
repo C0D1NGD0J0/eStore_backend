@@ -38,7 +38,7 @@ app.use(xss()); //prevents XSS attack
 
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000, // 10 minutes
-  max: 30 // limit each IP to 100 requests per windowMs
+  max: 100 // limit each IP to 100 requests per windowMs
 });
 app.use("/api/", limiter);
 
